@@ -1,1 +1,1 @@
-# tech_challenge_1
+# Tech Challenge 1
