@@ -165,7 +165,7 @@ python main.py
 ## 👨‍💻 Autor
 
 **Lucas Bastos Garcia**
-Desenvolvedor focado em IA, segurança e sistemas inteligentes.
+
 
 ---
 
