@@ -1,5 +1,8 @@
-pandas
+pandas 
 numpy
-scikit-learn
 matplotlib
 seaborn
+scikit-learn
+shap 
+jupyter
+tensorflow
