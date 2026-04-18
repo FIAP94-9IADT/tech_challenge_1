@@ -107,7 +107,7 @@ A rede neural demonstrou melhor desempenho geral em comparação aos modelos tra
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/diabetes-prediction.git
+git clone https://github.com/FIAP94-9IADT/tech_challenge_1.git
 cd diabetes-prediction
 ```
 
