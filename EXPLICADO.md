@@ -56,10 +56,18 @@ O gráfico de importância das variáveis, gerado a partir do modelo de árvore 
 - Entender como o modelo toma decisões  
 - Identificar quais características clínicas são mais relevantes  
 - Aumentar a transparência do modelo (explicabilidade)
+---
 
 ---
 
-## 📈 Conclusão da Análise
+## 📈  Acurâcia do Modelo
+
+![Acurâcia do Modelo](images/Figure_4.png)
+
+---
+
+
+##  Conclusão da Análise
 
 A análise exploratória demonstrou que:
 
