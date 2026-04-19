@@ -150,17 +150,17 @@ pip install -r requirements.txt
 ├── requirements.txt
 └── README.md
 
-###📌 Considerações
+📌 Considerações
 O modelo não substitui diagnóstico médico
 Deve ser utilizado como ferramenta de apoio
 Resultados dependem da qualidade dos dados
 Pode ser expandido para aplicações clínicas reais
-###🧠 Aprendizados
+🧠 Aprendizados
 Construção de pipelines de Machine Learning
 Aplicação de Deep Learning em saúde
 Pré-processamento de dados clínicos
 Interpretação de modelos
 Introdução à visão computacional
-###👨‍💻 Autor
+👨‍💻 Autor
 
 Lucas Bastos Garcia
