@@ -10,14 +10,14 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, confusion_matrix
 
 
 # ==============================
 # 1. CARREGAR O DATASET
 # ==============================
 
-df = pd.read_csv('data/diabetes.csv')
+df = pd.read_csv('data/breast-cancer.csv')
 
 print("📊 Primeiras linhas:")
 print(df.head())
@@ -27,27 +27,33 @@ print(df.columns)
 
 
 # ==============================
-# 2. PRÉ-PROCESSAMENTO
+# 2. PRÉ-PROCESSAMENTO (CORRIGIDO)
 # ==============================
 
-# Esse dataset já é numérico, mas vamos garantir
+# ⚠️ PRIMEIRO tratar o target (antes de converter tudo!)
+df['diagnosis'] = df['diagnosis'].map({'M': 1, 'B': 0})
+
+# Remover coluna ID se existir
+if 'id' in df.columns:
+    df = df.drop('id', axis=1)
+
+# Converter restante para numérico
 df = df.apply(lambda col: pd.to_numeric(col, errors='coerce'))
 
-# Ver valores nulos
+# Verificar nulos
 print("\n🔍 Valores nulos:")
 print(df.isnull().sum())
 
-# Preencher nulos (caso existam)
-df = df.fillna(0)
+# Preencher com mediana (melhor que 0 para dados médicos)
+df = df.fillna(df.median())
 
 
 # ==============================
-# 3. TARGET (JÁ EXISTE)
+# 3. SEPARAÇÃO TARGET / FEATURES
 # ==============================
 
-# Aqui usamos a coluna correta
-y = df['Outcome']
-X = df.drop('Outcome', axis=1)
+y = df['diagnosis']
+X = df.drop('diagnosis', axis=1)
 
 print("\n🎯 Distribuição do target:")
 print(y.value_counts())
@@ -58,7 +64,12 @@ print(y.value_counts())
 # ==============================
 
 sns.countplot(x=y)
-plt.title("Distribuição de Diabetes (0 = Não, 1 = Sim)")
+plt.title("Diagnóstico (0 = Benigno, 1 = Maligno)")
+plt.show()
+
+plt.figure(figsize=(10,6))
+sns.heatmap(X.corr(), cmap='coolwarm')
+plt.title("Correlação entre variáveis")
 plt.show()
 
 
@@ -98,10 +109,19 @@ model2.fit(X_train, y_train)
 # 8. AVALIAÇÃO
 # ==============================
 
+# Regressão Logística
 y_pred = model1.predict(X_test)
 
-print("\n📊 Relatório de Classificação (Regressão Logística):")
+print("\n📊 Regressão Logística:")
 print(classification_report(y_test, y_pred))
+print("Matriz de Confusão:")
+print(confusion_matrix(y_test, y_pred))
+
+# Árvore de Decisão
+y_pred_tree = model2.predict(X_test)
+
+print("\n🌳 Árvore de Decisão:")
+print(classification_report(y_test, y_pred_tree))
 
 
 # ==============================
@@ -112,9 +132,9 @@ importances = model2.feature_importances_
 
 plt.figure(figsize=(10, 6))
 plt.barh(range(len(importances)), importances)
-plt.title("Importância das Features")
+plt.title("Importância das Variáveis")
 plt.xlabel("Importância")
-plt.ylabel("Features")
+plt.ylabel("Índice das variáveis")
 plt.show()
 
 

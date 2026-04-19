@@ -1,174 +1,123 @@
-# 🧠 Diabetes Prediction - Machine Learning & Deep Learning
+🧠 Breast Cancer Prediction - Machine Learning & Deep Learning
 
-Sistema inteligente para predição de diabetes utilizando técnicas de Machine Learning e Deep Learning.
+Sistema inteligente para predição de câncer de mama utilizando técnicas de Machine Learning, Deep Learning e visão computacional.
 
----
+📌 Sobre o Projeto
 
-## 📌 Sobre o Projeto
+Este projeto tem como objetivo desenvolver modelos preditivos capazes de identificar tumores como benignos ou malignos, com base em dados clínicos e características extraídas de exames médicos.
 
-Este projeto tem como objetivo desenvolver modelos preditivos capazes de identificar a presença de diabetes em pacientes com base em características clínicas como:
+A solução combina algoritmos clássicos de Machine Learning com redes neurais artificiais, além de explorar conceitos de visão computacional.
 
-* Número de gestações
-* Pressão arterial
-* Índice de massa corporal (IMC)
-* Idade
-* Nível de glicose
+🎯 Objetivo
 
-A solução utiliza tanto algoritmos clássicos de Machine Learning quanto redes neurais artificiais com TensorFlow.
+Construir modelos de classificação para prever:
 
----
+diagnosis = 1 → Tumor maligno
+diagnosis = 0 → Tumor benigno
+🧪 Tecnologias Utilizadas
+Python 3.x
+Pandas
+NumPy
+Matplotlib / Seaborn
+Scikit-learn
+TensorFlow / Keras
+📊 Dataset
 
-## 🎯 Objetivo
+Dataset utilizado: Breast Cancer Dataset
 
-Construir e comparar diferentes modelos de classificação para prever se um paciente possui diabetes (`Outcome = 1`) ou não (`Outcome = 0`).
+Principais características:
+Radius (raio do tumor)
+Texture (textura)
+Perimeter (perímetro)
+Area (área)
+Smoothness (suavidade)
+Compactness
+Concavity
+Symmetry
+Target:
+diagnosis
+M → Maligno (1)
+B → Benigno (0)
+⚙️ Pipeline do Projeto
+📥 Carregamento dos dados
+🔍 Análise exploratória (EDA)
+🧹 Pré-processamento (limpeza e normalização)
+✂️ Divisão em treino e teste
+🤖 Treinamento dos modelos
+📈 Avaliação de desempenho
+🧠 Interpretabilidade
+🤖 Modelos Utilizados
+🔹 Machine Learning
+Regressão Logística
+Árvore de Decisão
+🔹 Deep Learning
+Rede Neural Artificial (TensorFlow/Keras)
 
----
+Arquitetura:
 
-## 🧪 Tecnologias Utilizadas
+Camada densa (ReLU)
+Camada oculta (ReLU)
+Camada de saída (Sigmoid)
+🖼️ Visão Computacional
 
-* Python 3.x
-* Pandas
-* NumPy
-* Matplotlib / Seaborn
-* Scikit-learn
-* TensorFlow / Keras
+O projeto também explora conceitos de visão computacional aplicados à detecção de câncer de mama.
 
----
+Foram utilizadas:
 
-## 📊 Dataset
+Redes Neurais Convolucionais (CNN)
+Classificação de imagens médicas (benigno vs maligno)
 
-O projeto utiliza o dataset **Pima Indians Diabetes Dataset**, contendo informações médicas de pacientes do sexo feminino.
+Essa abordagem permite identificar padrões visuais em exames, simulando aplicações reais na área da saúde.
 
-### Principais colunas:
+📊 Métricas de Avaliação
+Accuracy
+Precision
+Recall
+F1-score
+Matriz de confusão
+📈 Resultados
 
-* `Pregnancies`
-* `Glucose`
-* `BloodPressure`
-* `SkinThickness`
-* `Insulin`
-* `BMI`
-* `DiabetesPedigreeFunction`
-* `Age`
-* `Outcome` (Target)
+Os modelos apresentaram boa capacidade de classificação:
 
----
+A regressão logística demonstrou estabilidade
+A árvore de decisão forneceu interpretabilidade
+A rede neural apresentou melhor desempenho geral
 
-## ⚙️ Pipeline do Projeto
+Variáveis como raio e textura do tumor tiveram maior impacto na predição.
 
-1. 📥 Carregamento dos dados
-2. 🔍 Análise exploratória (EDA)
-3. 🧹 Pré-processamento (limpeza e normalização)
-4. ✂️ Divisão em treino e teste
-5. 🤖 Treinamento dos modelos
-6. 📈 Avaliação de desempenho
-7. 🧠 Interpretabilidade
-
----
-
-## 🤖 Modelos Utilizados
-
-### 🔹 Machine Learning
-
-* Regressão Logística
-* Árvore de Decisão
-
-### 🔹 Deep Learning
-
-* Rede Neural Artificial (TensorFlow/Keras)
-
-Arquitetura da rede neural:
-
-* Camada densa (ReLU)
-* Camada oculta (ReLU)
-* Camada de saída (Sigmoid)
-
----
-
-## 📊 Métricas de Avaliação
-
-* Accuracy
-* Precision
-* Recall
-* F1-score
-* Matriz de confusão
-
----
-
-## 📈 Resultados
-
-Os modelos apresentaram boa capacidade de classificação, sendo capazes de identificar padrões relevantes nos dados.
-
-A rede neural demonstrou melhor desempenho geral em comparação aos modelos tradicionais.
-
----
-
-## 🚀 Como Executar o Projeto
-
-### 1. Clonar o repositório
-
-```bash
+🚀 Como Executar o Projeto
+1. Clonar o repositório
 git clone https://github.com/FIAP94-9IADT/tech_challenge_1.git
-cd diabetes-prediction
-```
-
-### 2. Criar ambiente virtual
-
-```bash
+cd breast-cancer-prediction
+2. Criar ambiente virtual
 python3 -m venv venv
 source venv/bin/activate
-```
-
-### 3. Instalar dependências
-
-```bash
+3. Instalar dependências
 pip install -r requirements.txt
-```
-
-### 4. Executar o projeto
-
-```bash
+4. Executar o projeto
 python main.py
-```
-
----
-
-## 📁 Estrutura do Projeto
-
-```
+📁 Estrutura do Projeto
 .
 ├── data/
-│   └── diabetes.csv
+│   └── breast-cancer.csv
 ├── main.py
 ├── requirements.txt
 └── README.md
-```
+📌 Considerações
+O modelo não substitui diagnóstico médico
+Deve ser utilizado como ferramenta de apoio
+Resultados dependem da qualidade dos dados
+Pode ser expandido para aplicações clínicas reais
+🧠 Aprendizados
+Construção de pipelines de Machine Learning
+Aplicação de Deep Learning em saúde
+Pré-processamento de dados clínicos
+Interpretação de modelos
+Introdução à visão computacional
+👨‍💻 Autor
 
----
+Lucas Bastos Garcia
 
-## 📌 Considerações
-
-* O modelo não substitui diagnóstico médico.
-* Deve ser utilizado como ferramenta de apoio à decisão.
-* Pode ser expandido para uso em sistemas clínicos reais.
-
----
-
-## 🧠 Aprendizados
-
-* Construção de pipelines de Machine Learning
-* Comparação entre modelos clássicos e redes neurais
-* Pré-processamento e análise de dados
-* Avaliação de modelos
-
----
-
-## 👨‍💻 Autor
-
-**Lucas Bastos Garcia**
-
-
----
-
-## 📄 Licença
+📄 Licença
 
 Este projeto é de uso educacional.
