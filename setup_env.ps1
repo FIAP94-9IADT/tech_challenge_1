@@ -43,6 +43,21 @@ function Get-CompatiblePython {
     throw "Python compativel nao encontrado. Este projeto requer Python 3.11 ou 3.12 por causa das dependencias do notebook com CNN."
 }
 
+function Test-CompatiblePythonVersion {
+    param(
+        [string]$PythonExe
+    )
+
+    $versionText = & $PythonExe --version 2>&1
+    if ($versionText -match 'Python\s+(\d+)\.(\d+)') {
+        $major = [int]$matches[1]
+        $minor = [int]$matches[2]
+        return ($major -eq 3 -and ($minor -eq 11 -or $minor -eq 12))
+    }
+
+    return $false
+}
+
 function Install-ProjectDependencies {
     param(
         [string]$PythonExe,
@@ -59,6 +74,13 @@ function Install-ProjectDependencies {
     & $PythonExe -m pip install -r $RequirementsFile
     if ($LASTEXITCODE -ne 0) {
         throw "Falha ao instalar as dependencias do projeto."
+    }
+}
+
+if (Test-Path -LiteralPath $venvPython) {
+    if (-not (Test-CompatiblePythonVersion -PythonExe $venvPython)) {
+        Write-Host "O .venv existente foi criado com uma versao de Python incompatível. Recriando o ambiente..." -ForegroundColor Yellow
+        Remove-Item -LiteralPath $venvPath -Recurse -Force
     }
 }
 
