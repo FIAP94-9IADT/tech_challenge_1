@@ -14,18 +14,33 @@ function Get-TempDriveLetter {
     throw "Nao foi possivel encontrar uma letra de unidade livre para encurtar o caminho do projeto."
 }
 
-function Get-BasePython {
-    $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
-    if ($pythonCommand) {
-        return $pythonCommand.Source
-    }
-
+function Get-CompatiblePython {
     $pyCommand = Get-Command py -ErrorAction SilentlyContinue
     if ($pyCommand) {
-        return $pyCommand.Source
+        & $pyCommand.Source -3.12 --version *> $null
+        if ($LASTEXITCODE -eq 0) {
+            return @($pyCommand.Source, '-3.12')
+        }
+
+        & $pyCommand.Source -3.11 --version *> $null
+        if ($LASTEXITCODE -eq 0) {
+            return @($pyCommand.Source, '-3.11')
+        }
     }
 
-    throw "Python nao encontrado. Instale o Python 3.11+ e tente novamente."
+    $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+    if ($pythonCommand) {
+        $versionText = & $pythonCommand.Source --version 2>&1
+        if ($versionText -match 'Python\s+(\d+)\.(\d+)') {
+            $major = [int]$matches[1]
+            $minor = [int]$matches[2]
+            if ($major -eq 3 -and ($minor -eq 11 -or $minor -eq 12)) {
+                return @($pythonCommand.Source)
+            }
+        }
+    }
+
+    throw "Python compativel nao encontrado. Este projeto requer Python 3.11 ou 3.12 por causa das dependencias do notebook com CNN."
 }
 
 function Install-ProjectDependencies {
@@ -48,9 +63,16 @@ function Install-ProjectDependencies {
 }
 
 if (-not (Test-Path -LiteralPath $venvPython)) {
-    $basePython = Get-BasePython
+    $basePython = Get-CompatiblePython
     Write-Host "Criando ambiente virtual em '.venv'..." -ForegroundColor Cyan
-    & $basePython -m venv $venvPath
+
+    if ($basePython.Length -gt 1) {
+        & $basePython[0] $basePython[1] -m venv $venvPath
+    }
+    else {
+        & $basePython[0] -m venv $venvPath
+    }
+
     if ($LASTEXITCODE -ne 0) {
         throw "Falha ao criar o ambiente virtual."
     }
