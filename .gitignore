@@ -77,10 +77,17 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.executed.ipynb
 
 # IPython
 profile_default/
 ipython_config.py
+
+# Local Jupyter/IPython/Matplotlib runtime directories
+.ipython_local/
+.jupyter_config/
+.jupyter_local/
+.mplconfig/
 
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
