@@ -14,14 +14,14 @@ function Get-TempDriveLetter {
 }
 
 function Get-BasePython {
-    $pyCommand = Get-Command py -ErrorAction SilentlyContinue
-    if ($pyCommand) {
-        return @($pyCommand.Source, '-3.11')
-    }
-
     $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
     if ($pythonCommand) {
         return @($pythonCommand.Source)
+    }
+
+    $pyCommand = Get-Command py -ErrorAction SilentlyContinue
+    if ($pyCommand) {
+        return @($pyCommand.Source)
     }
 
     throw "Python nao encontrado. Instale o Python 3.11+ e tente novamente."
@@ -72,4 +72,3 @@ finally {
 Write-Host ""
 Write-Host "Ambiente configurado com sucesso." -ForegroundColor Green
 Write-Host "Agora basta abrir os notebooks no VS Code ou Jupyter e executar as celulas." -ForegroundColor Green
-
